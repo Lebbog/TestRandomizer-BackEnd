@@ -2,19 +2,20 @@ package RestService.TestRandomizer.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Entity
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long customerId;
 
-    private String subject;
     private String type;
     private String value;
+    private String subject;
+
+    @ManyToOne
+    @JoinColumn(name = "bookId")
+    private Book book;
 }

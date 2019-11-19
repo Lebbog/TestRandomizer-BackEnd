@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping(QuestionController.BASE_URL)
 public class QuestionController {
-    public static final String BASE_URL = "api/v1/questions";
+    public static final String BASE_URL = "api/v1/testrandomizer/questions";
     private final QuestionService questionService;
 
     public QuestionController(QuestionService questionService){
@@ -28,11 +28,7 @@ public class QuestionController {
         return questionService.findQuestionById(id);
     }
 
-//    @GetMapping("/specific")
-//    List<Question> getQuestionsByType(@RequestParam(value="subject", defaultValue="Caesar") String subject,
-//                                      @RequestParam(value="type", defaultValue="Definition") String type){
-//        return questionService.findQuestionsBySubjectAndType(subject, type);
-//    }
+
     @GetMapping("/specific")
     List<Question> getQuestionsByType(@RequestParam(value="subject", defaultValue="Caesar") String subject,
                                       @RequestParam(value="tests", defaultValue="1") int tests,
