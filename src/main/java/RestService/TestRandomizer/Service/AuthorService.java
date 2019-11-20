@@ -10,4 +10,5 @@ public interface AuthorService {
     Author saveAuthor(Author author);
     List<Author> saveAllAuthors(List<Author> authors);
     Author findAuthorByName(String name);
+    Author createByName(String name);
 }

@@ -24,7 +24,7 @@ public class AuthorController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Author saveAuthor(@RequestBody Author author){
-        return authorService.saveAuthor(author);
+        return authorService.createByName(author.getName());
     }
 
     @PostMapping("/list")

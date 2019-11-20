@@ -35,4 +35,12 @@ public class AuthorServiceImpl implements AuthorService{
     {
         return authorRepository.findByName(name);
     }
+    @Override
+    public Author createByName(String name) {
+        Author auth = authorRepository.findByName(name);
+        if(auth != null) return auth;
+        auth  = new Author();
+        auth.setName(name);
+        return authorRepository.save(auth);
+    }
 }
