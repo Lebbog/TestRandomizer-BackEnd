@@ -19,29 +19,34 @@ public class AuthorController {
         this.authorService = authorService;
         this.bookService = bookService;
     }
+    @CrossOrigin
     @GetMapping
     List<Author> getAllAuthors(){
         return authorService.findAllAuthors();
     }
 
+    @CrossOrigin
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Author saveAuthor(@RequestBody Author author){
         return authorService.saveAuthor(author);
     }
 
+    @CrossOrigin
     @PostMapping("/list")
     @ResponseStatus(HttpStatus.CREATED)
     public List<Author> saveAllAuthors(@RequestBody List<Author> authors){
         return authorService.saveAllAuthors(authors);
     }
 
+    @CrossOrigin
     @PostMapping("/{authorId}/book")
     @ResponseStatus(HttpStatus.CREATED)
     public Book createBook(@PathVariable(value = "authorId") Long authorId, @RequestBody Book book){
         return bookService.createBook(authorId, book);
     }
 
+    @CrossOrigin
     @DeleteMapping("/{authorId}")
     public void deleteAuthor(@PathVariable(value = "authorId") Long authorId){
          authorService.deleteAuthorById(authorId);
