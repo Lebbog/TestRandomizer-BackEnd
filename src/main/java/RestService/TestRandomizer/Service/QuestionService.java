@@ -10,5 +10,5 @@ public interface QuestionService {
     List<Question> findAllQuestions();
     Question saveQuestion(Question question);
     List<Question> saveAllQuestions(List<Question> questions);
-    List<Question> findQuestionsBySubjectAndType(String subject, String type);
+    //List<Question> findQuestionsBySubjectAndType(String subject, String type);
 }

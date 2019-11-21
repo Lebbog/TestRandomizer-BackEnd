@@ -20,5 +20,6 @@ public class Author {
 
     @JsonIgnore
     @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
-    @EqualsAndHashCode.Exclude private Set<Book> books = new HashSet<>();
+    @EqualsAndHashCode.Exclude
+    private Set<Book> books = new HashSet<>();
 }

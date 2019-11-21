@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-//    @Query(value = "SELECT b FROM Book b WHERE b.authorid= ?1 AND b.title= ?2")
+//    @Query(value = "SELECT b FROM Book b WHERE b.author.authorId= ?1 AND b.title= ?2")
 //    Book findByTitleAndAuthorId(long authorId, String title);
-      List<Book> findByTitle(String title);
 }

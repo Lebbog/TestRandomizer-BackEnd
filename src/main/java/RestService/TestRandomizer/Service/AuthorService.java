@@ -9,6 +9,7 @@ public interface AuthorService {
     List<Author> findAllAuthors();
     Author saveAuthor(Author author);
     List<Author> saveAllAuthors(List<Author> authors);
-    Author findAuthorByName(String name);
-    Author createByName(String name);
+    void deleteAuthorById(long id);
+//    Author findAuthorByName(String name);
+    //Author createByName(String name);
 }

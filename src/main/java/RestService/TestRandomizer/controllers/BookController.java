@@ -24,14 +24,6 @@ public class BookController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Book saveBook(@RequestBody Book book){
-        //System.out.println(book);
-        String authName = book.getAuthorName();
-        return bookService.createBook(authName, book);
+        return bookService.saveBook(book);
     }
-
-//    @PostMapping("/list")
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public List<Book> saveAllBooks(@RequestBody List<Book> books){
-//        return bookService.saveAllBooks(books);
-//    }
 }

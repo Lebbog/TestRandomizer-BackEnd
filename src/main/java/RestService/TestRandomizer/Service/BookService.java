@@ -8,6 +8,6 @@ public interface BookService {
     Book findBookById(Long id);
     List<Book> findAllBooks();
     Book saveBook(Book Book);
-    Book createBook(String authorName, Book book);
+    Book createBook(Long authorId, Book book);
 //    List<Book> saveAllBooks(List<Book> Books);
 }

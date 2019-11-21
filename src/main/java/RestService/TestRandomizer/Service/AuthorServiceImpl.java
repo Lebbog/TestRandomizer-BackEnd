@@ -30,17 +30,24 @@ public class AuthorServiceImpl implements AuthorService{
     public List<Author> saveAllAuthors(List<Author> authors){
         return authorRepository.saveAll(authors);
     }
+
     @Override
-    public Author findAuthorByName(String name)
-    {
-        return authorRepository.findByName(name);
+    public void deleteAuthorById(long id){
+        if(authorRepository.existsById(id)) {
+            authorRepository.deleteById(id);
+        }
     }
-    @Override
-    public Author createByName(String name) {
-        Author auth = authorRepository.findByName(name);
-        if(auth != null) return auth;
-        auth  = new Author();
-        auth.setName(name);
-        return authorRepository.save(auth);
-    }
+//    @Override
+//    public Author findAuthorByName(String name)
+//    {
+//        return authorRepository.findByName(name);
+//    }
+//    @Override
+//    public Author createByName(String name) {
+//        Author auth = authorRepository.findByName(name);
+//        if(auth != null) return auth;
+//        auth  = new Author();
+//        auth.setName(name);
+//        return authorRepository.save(auth);
+//    }
 }

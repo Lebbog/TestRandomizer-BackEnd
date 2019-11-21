@@ -29,8 +29,8 @@ public class QuestionServiceImpl  implements QuestionService{
     public List<Question> saveAllQuestions( List<Question> questions){
         return questionRepository.saveAll(questions);
 }
-    @Override
-    public List<Question> findQuestionsBySubjectAndType(String subject, String type){
-        return questionRepository.findBySubjectAndType(subject, type);
-    }
+//    @Override
+//    public List<Question> findQuestionsBySubjectAndType(String subject, String type){
+//        return questionRepository.findBySubjectAndType(subject, type);
+//    }
 }

@@ -13,7 +13,7 @@ public class Question {
 
     private String type;
     private String value;
-    private String subject;
+    //private String subject;
 
     @ManyToOne
     @JoinColumn(name = "bookId")

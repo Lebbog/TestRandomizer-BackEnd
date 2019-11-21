@@ -5,7 +5,9 @@ import RestService.TestRandomizer.model.Book;
 import RestService.TestRandomizer.repositories.AuthorRepository;
 import RestService.TestRandomizer.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashSet;
 import java.util.List;
@@ -15,7 +17,6 @@ import java.util.Set;
 public class BookServiceImpl implements BookService{
 
     private final AuthorRepository authorRepository;
-
     private final BookRepository bookRepository;
 
     public BookServiceImpl(BookRepository bookRepository, AuthorRepository authorRepository) {
@@ -36,27 +37,16 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public Book createBook(String authorName, Book book){
-        //Set<Book> bks = new HashSet();
-        Author auth = authorRepository.findByName(authorName);
-        if(auth == null) {
-            auth = new Author();
-            auth.setName(authorName);
-            auth = authorRepository.save(auth);
-        }
-        List<Book> books = bookRepository.findByTitle(book.getTitle());
-        for (Book b : books) {
-            if(b.getAuthor().getName().equals(authorName)) {
-                return b;
-            }
+    public Book createBook(Long authorId, Book book){
+        Author auth = authorRepository.findById(authorId).get();
+        if(auth == null){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "authorId not found"
+            );
         }
         book.setAuthor(auth);
-        Book book1 = bookRepository.save(book);
-        //bks.add(book1);
-        //auth.setBooks(bks);
-
-        auth.getBooks().add(book1);
-        return book1;
+        auth.getBooks().add(book);
+        return bookRepository.save(book);
     }
 //    @Override
 //    public List<Book> saveAllBooks(List<Book> books){
