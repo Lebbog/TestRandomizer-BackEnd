@@ -5,9 +5,11 @@ import RestService.TestRandomizer.Service.BookService;
 import RestService.TestRandomizer.model.Author;
 import RestService.TestRandomizer.model.Book;
 import org.springframework.http.HttpStatus;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @RestController
 @RequestMapping(AuthorController.BASE_URL)
@@ -29,9 +31,18 @@ public class AuthorController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Author saveAuthor(@RequestBody Author author){
+        if(author.getName() == "") return null;
         return authorService.saveAuthor(author);
     }
 
+//    @CrossOrigin
+//    @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+//        produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public Author saveAuthor(@RequestParam MultiValueMap  body){
+//        System.out.println(body.get("name"));
+//        return null;
+//    }
     @CrossOrigin
     @PostMapping("/list")
     @ResponseStatus(HttpStatus.CREATED)
