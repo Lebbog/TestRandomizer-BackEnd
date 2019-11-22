@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long customerId;
+    private Long questionId;
 
     private String type;
     private String value;
