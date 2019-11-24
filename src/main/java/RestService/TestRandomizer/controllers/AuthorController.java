@@ -7,10 +7,11 @@ import RestService.TestRandomizer.model.Book;
 import org.springframework.http.HttpStatus;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
-
+@CrossOrigin
 @RestController
 @RequestMapping(AuthorController.BASE_URL)
 public class AuthorController {
@@ -21,17 +22,21 @@ public class AuthorController {
         this.authorService = authorService;
         this.bookService = bookService;
     }
-    @CrossOrigin
+//    @CrossOrigin
     @GetMapping
     List<Author> getAllAuthors(){
         return authorService.findAllAuthors();
     }
 
-    @CrossOrigin
+//    @CrossOrigin
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Author saveAuthor(@RequestBody Author author){
-        if(author.getName() == "") return null;
+        if(author.getName() == "") {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Author name cannot be empty"
+            );
+        }
         return authorService.saveAuthor(author);
     }
 
@@ -43,23 +48,21 @@ public class AuthorController {
 //        System.out.println(body.get("name"));
 //        return null;
 //    }
-    @CrossOrigin
+//    @CrossOrigin
     @PostMapping("/list")
     @ResponseStatus(HttpStatus.CREATED)
     public List<Author> saveAllAuthors(@RequestBody List<Author> authors){
         return authorService.saveAllAuthors(authors);
     }
 
-    @CrossOrigin
+//    @CrossOrigin
     @PostMapping("/{authorId}/book")
     @ResponseStatus(HttpStatus.CREATED)
     public Book createBook(@PathVariable(value = "authorId") Long authorId, @RequestBody Book book){
         return bookService.createBook(authorId, book);
     }
-
-    @CrossOrigin
     @DeleteMapping("/{authorId}")
-    public void deleteAuthor(@PathVariable(value = "authorId") Long authorId){
+    public void deleteAuthor(@PathVariable (value = "authorId") Long authorId){
          authorService.deleteAuthorById(authorId);
     }
 }

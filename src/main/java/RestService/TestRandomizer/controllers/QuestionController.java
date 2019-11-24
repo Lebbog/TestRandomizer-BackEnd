@@ -18,13 +18,11 @@ public class QuestionController {
         this.questionService = questionService;
     }
 
-    @CrossOrigin
     @GetMapping
     List<Question> getAllQuestions(){
         return questionService.findAllQuestions();
     }
 
-    @CrossOrigin
     @GetMapping("/{id}")
     Question getQuestionById(@PathVariable Long id){
         return questionService.findQuestionById(id);

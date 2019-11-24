@@ -25,7 +25,7 @@ public class Book {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "authorId")
-    @OnDelete(action= OnDeleteAction.CASCADE)
+    //@OnDelete(action= OnDeleteAction.CASCADE)
     @JsonIgnore
     @EqualsAndHashCode.Exclude
     private Author author;

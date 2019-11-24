@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
-@CrossOrigin()
+
 public interface QuestionRepository extends JpaRepository<Question, Long>{
     //List<Question> findBySubjectAndType(String subject, String type);
 }

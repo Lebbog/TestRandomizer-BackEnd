@@ -16,12 +16,12 @@ public class BookController {
     public BookController(BookService bookService) {
         this.bookService = bookService;
     }
-    @CrossOrigin
+
     @GetMapping
     List<Book> getAllBooks(){
         return bookService.findAllBooks();
     }
-    @CrossOrigin
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Book saveBook(@RequestBody Book book){
