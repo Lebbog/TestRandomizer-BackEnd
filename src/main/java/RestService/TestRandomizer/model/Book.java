@@ -20,20 +20,21 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookId;
-//    private String authorName;
     private String title;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "authorId")
-    //@OnDelete(action= OnDeleteAction.CASCADE)
+    @OnDelete(action= OnDeleteAction.CASCADE)
     @JsonIgnore
     @EqualsAndHashCode.Exclude
     private Author author;
 
-    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
+    @JsonIgnore
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @EqualsAndHashCode.Exclude
     private Set<Question> questions = new HashSet<>();
 
-//    public Long getAuthorId(){
-//        return author.getAuthorId();
-//    }
+    public Long getAuthorId(){
+        return author.getAuthorId();
+    }
 }

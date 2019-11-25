@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping(QuestionController.BASE_URL)
 public class QuestionController {
@@ -28,7 +29,10 @@ public class QuestionController {
         return questionService.findQuestionById(id);
     }
 
-
+    @DeleteMapping("/{questionId}")
+    public void deleteBookById(@PathVariable (value = "questionId") Long questionId){
+        questionService.deleteQuestionById(questionId);
+    }
 //    @GetMapping("/specific")
 //    List<Question> getQuestionsByType(@RequestParam(value="subject", defaultValue="Caesar") String subject,
 //                                      @RequestParam(value="tests", defaultValue="1") int tests,
@@ -43,15 +47,5 @@ public class QuestionController {
 //        return q;
 //        //return questionService.findQuestionsBySubjectAndType(subject, type);
 //    }
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Question saveQuestion(@RequestBody Question question){
-        return questionService.saveQuestion(question);
-    }
 
-    @PostMapping("/list")
-    @ResponseStatus(HttpStatus.CREATED)
-    public List<Question> saveAllQuestions(@RequestBody List<Question> questions){
-        return questionService.saveAllQuestions(questions);
-    }
 }

@@ -1,6 +1,11 @@
 package RestService.TestRandomizer.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.*;
 
@@ -13,9 +18,15 @@ public class Question {
 
     private String type;
     private String value;
-    //private String subject;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bookId")
+    @OnDelete(action= OnDeleteAction.CASCADE)
+    @JsonIgnore
+    @EqualsAndHashCode.Exclude
     private Book book;
+
+    public Long getBookId(){
+        return book.getBookId();
+    }
 }

@@ -1,30 +1,38 @@
 package RestService.TestRandomizer.controllers;
 
 import RestService.TestRandomizer.Service.BookService;
+import RestService.TestRandomizer.Service.QuestionService;
 import RestService.TestRandomizer.model.Book;
+import RestService.TestRandomizer.model.Question;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping(BookController.BASE_URL)
 public class BookController {
     public static final String BASE_URL = "api/v1/testrandomizer/books";
     private final BookService bookService;
-
-    public BookController(BookService bookService) {
+    private final QuestionService questionService;
+    public BookController(BookService bookService, QuestionService questionService) {
         this.bookService = bookService;
+        this.questionService = questionService;
     }
-
     @GetMapping
     List<Book> getAllBooks(){
         return bookService.findAllBooks();
     }
 
-    @PostMapping
+    @DeleteMapping("/{bookId}")
+    public void deleteBookById(@PathVariable (value = "bookId") Long bookId){
+        bookService.deleteBookById(bookId);
+    }
+    @PostMapping("/{bookId}/questions")
     @ResponseStatus(HttpStatus.CREATED)
-    public Book saveBook(@RequestBody Book book){
-        return bookService.saveBook(book);
+    public Question createQuestion(@PathVariable(value = "bookId") Long bookId, @RequestBody Question question){
+        System.out.println(question);
+        return questionService.createQuestion(bookId, question);
     }
 }

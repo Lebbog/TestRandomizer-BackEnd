@@ -31,25 +31,30 @@ public class BookServiceImpl implements BookService{
     public List<Book> findAllBooks(){
         return bookRepository.findAll();
     }
-    @Override
-    public Book saveBook(Book book){
-        return bookRepository.save(book);
-    }
 
     @Override
     public Book createBook(Long authorId, Book book){
-        Author auth = authorRepository.findById(authorId).get();
-        if(auth == null){
+        if(!authorRepository.existsById(authorId)){
             throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "authorId not found"
+                    HttpStatus.NOT_FOUND, "authorId " + authorId + " not found"
             );
         }
-        book.setAuthor(auth);
-        auth.getBooks().add(book);
-        return bookRepository.save(book);
+        else {
+            Author auth = authorRepository.findById(authorId).get();
+            book.setAuthor(auth);
+            auth.getBooks().add(book);
+            return bookRepository.save(book);
+        }
     }
-//    @Override
-//    public List<Book> saveAllBooks(List<Book> books){
-//        return bookRepository.saveAll(books);
-//    }
+    @Override
+    public void deleteBookById(Long bookId){
+        if(!bookRepository.existsById(bookId)){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "bookId " + bookId + " not found"
+            );
+        }
+        else{
+           bookRepository.deleteById(bookId);
+        }
+    }
 }

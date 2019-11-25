@@ -39,30 +39,19 @@ public class AuthorController {
         }
         return authorService.saveAuthor(author);
     }
-
-//    @CrossOrigin
-//    @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
-//        produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public Author saveAuthor(@RequestParam MultiValueMap  body){
-//        System.out.println(body.get("name"));
-//        return null;
-//    }
-//    @CrossOrigin
     @PostMapping("/list")
     @ResponseStatus(HttpStatus.CREATED)
     public List<Author> saveAllAuthors(@RequestBody List<Author> authors){
         return authorService.saveAllAuthors(authors);
     }
 
-//    @CrossOrigin
-    @PostMapping("/{authorId}/book")
+    @PostMapping("/{authorId}/books")
     @ResponseStatus(HttpStatus.CREATED)
     public Book createBook(@PathVariable(value = "authorId") Long authorId, @RequestBody Book book){
         return bookService.createBook(authorId, book);
     }
     @DeleteMapping("/{authorId}")
-    public void deleteAuthor(@PathVariable (value = "authorId") Long authorId){
+    public void deleteAuthorById(@PathVariable (value = "authorId") Long authorId){
          authorService.deleteAuthorById(authorId);
     }
 }
