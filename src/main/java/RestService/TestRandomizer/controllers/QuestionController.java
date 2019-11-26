@@ -1,11 +1,14 @@
 package RestService.TestRandomizer.controllers;
 
+import RestService.TestRandomizer.Service.BookService;
 import RestService.TestRandomizer.Service.QuestionService;
 import RestService.TestRandomizer.model.Question;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @CrossOrigin
@@ -14,9 +17,10 @@ import java.util.List;
 public class QuestionController {
     public static final String BASE_URL = "api/v1/testrandomizer/questions";
     private final QuestionService questionService;
-
-    public QuestionController(QuestionService questionService){
+    private final BookService bookService;
+    public QuestionController(QuestionService questionService, BookService bookService){
         this.questionService = questionService;
+        this.bookService = bookService;
     }
 
     @GetMapping
@@ -33,19 +37,32 @@ public class QuestionController {
     public void deleteBookById(@PathVariable (value = "questionId") Long questionId){
         questionService.deleteQuestionById(questionId);
     }
-//    @GetMapping("/specific")
-//    List<Question> getQuestionsByType(@RequestParam(value="subject", defaultValue="Caesar") String subject,
-//                                      @RequestParam(value="tests", defaultValue="1") int tests,
-//                                      @RequestParam(value="type", defaultValue="Definition,Multiple Choice") String [] type,
-//                                      @RequestParam(value="number", defaultValue = "3,3") int [] number){
-//        System.out.println("Subject: " + subject + "        Tests: " + tests);
-//        for(int i = 0; i < type.length; i++)
-//        {
-//            System.out.println("Type: " + type[i] + "  Number: " + number[i]);
-//        }
-//        List<Question> q = new ArrayList();
-//        return q;
-//        //return questionService.findQuestionsBySubjectAndType(subject, type);
-//    }
+    @GetMapping("/tests")
+    List<List<Question>> createTests( @RequestParam(value="testAmount" ) int testAmount,
+                                      @RequestParam(value="bookId") long [] bookId,
+                                      @RequestParam(value="type") String [] type,
+                                      @RequestParam(value="amount") int [] amount){
+        List<List<Question>> tests = new ArrayList();
+        while(testAmount-- > 0) {
+            List<Question> questions = new ArrayList();
+            for (int i = 0; i < bookId.length; i++) {
+                System.out.println( "i: " + i );
+                //Check if book ID exists
+                if(!bookService.existsById(bookId[i])) {
+                    throw new ResponseStatusException(
+                            HttpStatus.NOT_FOUND, "bookId " + bookId[i] + " not found"
+                    );
+                }
+                List<Question> allQuestions = questionService.findQuestions(bookId[i], type[i]);
+                Collections.shuffle(allQuestions);
+                for (int j = 0; j < amount[i]; j++) {
+                    if(j < allQuestions.size())
+                        questions.add(allQuestions.get(j));
+                }
+            }
+            tests.add(questions);
+        }
+        return tests;
+    }
 
 }

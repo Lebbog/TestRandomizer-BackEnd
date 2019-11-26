@@ -9,5 +9,6 @@ public interface BookService {
     List<Book> findAllBooks();
     void deleteBookById(Long bookId);
     Book createBook(Long authorId, Book book);
+    boolean existsById(long bookId);
 //    List<Book> saveAllBooks(List<Book> Books);
 }

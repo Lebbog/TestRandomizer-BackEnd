@@ -10,6 +10,7 @@ public interface QuestionService {
     List<Question> findAllQuestions();
     Question createQuestion(Long bookId, Question question);
     void deleteQuestionById(Long questionId);
+    List<Question> findQuestions(long bookId, String type);
 //    Question saveQuestion(Question question);
 //    List<Question> saveAllQuestions(List<Question> questions);
     //List<Question> findQuestionsBySubjectAndType(String subject, String type);

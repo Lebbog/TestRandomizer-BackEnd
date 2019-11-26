@@ -25,10 +25,6 @@ public class QuestionServiceImpl  implements QuestionService{
     public List<Question> findAllQuestions(){
         return questionRepository.findAll();
     }
-//    @Override
-//    public Question saveQuestion(Question question){
-//        return questionRepository.save(question);
-//    }
     @Override
     public Question createQuestion(Long bookId, Question question){
         if(!bookRepository.existsById(bookId)){
@@ -52,9 +48,9 @@ public class QuestionServiceImpl  implements QuestionService{
                     HttpStatus.NOT_FOUND, "questionId " + questionId + " not found");
         }
     }
+    @Override
+    public List<Question> findQuestions(long bookId, String type){
+        return questionRepository.findQuestions(bookId, type);
+    }
 }
-//    @Override
-//    public List<Question> findQuestionsBySubjectAndType(String subject, String type){
-//        return questionRepository.findBySubjectAndType(subject, type);
-//    }
 

@@ -29,10 +29,10 @@ public class BookController {
     public void deleteBookById(@PathVariable (value = "bookId") Long bookId){
         bookService.deleteBookById(bookId);
     }
+
     @PostMapping("/{bookId}/questions")
     @ResponseStatus(HttpStatus.CREATED)
     public Question createQuestion(@PathVariable(value = "bookId") Long bookId, @RequestBody Question question){
-        System.out.println(question);
         return questionService.createQuestion(bookId, question);
     }
 }

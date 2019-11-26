@@ -10,6 +10,4 @@ public interface AuthorService {
     Author saveAuthor(Author author);
     List<Author> saveAllAuthors(List<Author> authors);
     void deleteAuthorById(long id);
-//    Author findAuthorByName(String name);
-    //Author createByName(String name);
 }
