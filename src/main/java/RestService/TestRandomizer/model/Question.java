@@ -29,4 +29,10 @@ public class Question {
     public Long getBookId(){
         return book.getBookId();
     }
+    public String getBookTitle(){
+        return book.getTitle();
+    }
+    public String getAuthorName(){
+        return book.getAuthorName();
+    }
 }

@@ -48,6 +48,11 @@ public class AuthorController {
     @PostMapping("/{authorId}/books")
     @ResponseStatus(HttpStatus.CREATED)
     public Book createBook(@PathVariable(value = "authorId") Long authorId, @RequestBody Book book){
+        if(book.getTitle() == "") {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Book Title cannot be empty"
+            );
+        }
         return bookService.createBook(authorId, book);
     }
     @DeleteMapping("/{authorId}")

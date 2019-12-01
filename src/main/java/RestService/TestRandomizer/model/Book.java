@@ -34,6 +34,9 @@ public class Book {
     @EqualsAndHashCode.Exclude
     private Set<Question> questions = new HashSet<>();
 
+    public String getAuthorName(){
+        return author.getName();
+    }
     public Long getAuthorId(){
         return author.getAuthorId();
     }
