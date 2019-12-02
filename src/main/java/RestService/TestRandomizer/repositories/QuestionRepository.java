@@ -11,4 +11,7 @@ import java.util.List;
 public interface QuestionRepository extends JpaRepository<Question, Long>{
     @Query(value = "SELECT q FROM Question q WHERE q.book.bookId= ?1 AND q.type= ?2")
     List<Question> findQuestions(long bookId, String type);
+
+    @Query(value = "SELECT distinct type FROM question", nativeQuery = true)
+        List<String> getTypes();
 }

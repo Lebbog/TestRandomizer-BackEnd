@@ -26,6 +26,8 @@ public class Question {
     @EqualsAndHashCode.Exclude
     private Book book;
 
+
+
     public Long getBookId(){
         return book.getBookId();
     }
@@ -35,4 +37,13 @@ public class Question {
     public String getAuthorName(){
         return book.getAuthorName();
     }
+
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "typeId")
+//    @OnDelete(action= OnDeleteAction.CASCADE)
+//    @JsonIgnore
+//    @EqualsAndHashCode.Exclude
+//    private Type type;
+//    public Long getTypeId(){return type.getTypeId();}
+//    public String getType() {return type.getType();}
 }

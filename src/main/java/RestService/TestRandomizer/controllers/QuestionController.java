@@ -33,6 +33,11 @@ public class QuestionController {
         return questionService.findQuestionById(id);
     }
 
+    @GetMapping("/types")
+    List<String> getQuestionTypes() {
+        return questionService.getTypes();
+    }
+
     @DeleteMapping("/{questionId}")
     public void deleteBookById(@PathVariable (value = "questionId") Long questionId){
         questionService.deleteQuestionById(questionId);

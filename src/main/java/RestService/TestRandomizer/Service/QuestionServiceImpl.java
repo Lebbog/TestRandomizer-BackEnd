@@ -39,6 +39,7 @@ public class QuestionServiceImpl  implements QuestionService{
             return questionRepository.save(question);
         }
     }
+    @Override
     public void deleteQuestionById(Long questionId){
         if(questionRepository.existsById(questionId)) {
             questionRepository.deleteById(questionId);
@@ -51,6 +52,10 @@ public class QuestionServiceImpl  implements QuestionService{
     @Override
     public List<Question> findQuestions(long bookId, String type){
         return questionRepository.findQuestions(bookId, type);
+    }
+    @Override
+    public List<String> getTypes(){
+    return questionRepository.getTypes();
     }
 }
 
