@@ -6,9 +6,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
+import java.util.Set;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-//    @Query(value = "SELECT b FROM Book b WHERE b.author.authorId= ?1 AND b.title= ?2")
-//    Book findByTitleAndAuthorId(long authorId, String title);
+    //get distinct type of questions that belong to this book
+    @Query(value = "select a.book_id, GROUP_CONCAT(distinct b.type) as questionTypes from book as a inner join question as b on a.book_id = b.book_id group by book_id;",
+            nativeQuery = true)
+    List<BookTypes> getTypes();
+
+    public interface BookTypes {
+        long getBook_id();
+        String getQuestionTypes();
+    }
 }

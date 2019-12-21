@@ -13,5 +13,5 @@ public interface QuestionRepository extends JpaRepository<Question, Long>{
     List<Question> findQuestions(long bookId, String type);
 
     @Query(value = "SELECT distinct type FROM question", nativeQuery = true)
-        List<String> getTypes();
+    List<String> getTypes();
 }

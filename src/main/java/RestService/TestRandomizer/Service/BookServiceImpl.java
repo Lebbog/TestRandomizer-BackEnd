@@ -61,4 +61,8 @@ public class BookServiceImpl implements BookService{
     public boolean existsById(long bookId){
         return bookRepository.existsById(bookId);
     }
+    @Override
+    public  List<BookRepository.BookTypes> getTypes(){
+        return bookRepository.getTypes();
+    }
 }

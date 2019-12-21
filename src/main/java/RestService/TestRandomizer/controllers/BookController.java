@@ -4,11 +4,12 @@ import RestService.TestRandomizer.Service.BookService;
 import RestService.TestRandomizer.Service.QuestionService;
 import RestService.TestRandomizer.model.Book;
 import RestService.TestRandomizer.model.Question;
+import RestService.TestRandomizer.repositories.BookRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
+import java.util.*;
 
 @CrossOrigin
 @RestController
@@ -40,5 +41,20 @@ public class BookController {
             );
         }
         return questionService.createQuestion(bookId, question);
+    }
+    @GetMapping("/questionTypes")
+    List<Map<String, Object>> getBookTypes(){
+        List<Map<String, Object>> bookTypes = new ArrayList();
+        List<BookRepository.BookTypes> res = bookService.getTypes();
+        for(BookRepository.BookTypes bt : res){
+            Long bookId = bt.getBook_id();
+            String [] types = bt.getQuestionTypes().split(",");
+            Map<String, Object> ent = new HashMap();
+            ent.put("Book_Id", bookId);
+            ent.put("questionTypes", types);
+            bookTypes.add(ent);
+        }
+        return bookTypes;
+        //Arrays.asList(types.split(","))
     }
 }

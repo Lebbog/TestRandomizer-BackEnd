@@ -23,8 +23,8 @@ public class Author {
     @EqualsAndHashCode.Exclude
     private Set<Book> books = new HashSet<>();
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @EqualsAndHashCode.Exclude
-    private Set<Question> questions = new HashSet<>();
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+//    @EqualsAndHashCode.Exclude
+//    private Set<Question> questions = new HashSet<>();
 }

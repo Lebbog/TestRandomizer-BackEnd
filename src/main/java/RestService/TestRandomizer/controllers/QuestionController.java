@@ -42,7 +42,7 @@ public class QuestionController {
     public void deleteBookById(@PathVariable (value = "questionId") Long questionId){
         questionService.deleteQuestionById(questionId);
     }
-    @GetMapping("/tests")
+    @GetMapping("/specific")
     List<List<Question>> createTests( @RequestParam(value="testAmount" ) int testAmount,
                                       @RequestParam(value="bookId") long [] bookId,
                                       @RequestParam(value="type") String [] type,
@@ -51,7 +51,6 @@ public class QuestionController {
         while(testAmount-- > 0) {
             List<Question> questions = new ArrayList();
             for (int i = 0; i < bookId.length; i++) {
-                System.out.println( "i: " + i );
                 //Check if book ID exists
                 if(!bookService.existsById(bookId[i])) {
                     throw new ResponseStatusException(
@@ -69,5 +68,4 @@ public class QuestionController {
         }
         return tests;
     }
-
 }
