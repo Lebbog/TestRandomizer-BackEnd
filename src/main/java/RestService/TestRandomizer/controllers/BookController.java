@@ -50,7 +50,7 @@ public class BookController {
             Long bookId = bt.getBook_id();
             String [] types = bt.getQuestionTypes().split(",");
             Map<String, Object> ent = new HashMap();
-            ent.put("Book_Id", bookId);
+            ent.put("bookId", bookId);
             ent.put("questionTypes", types);
             bookTypes.add(ent);
         }
